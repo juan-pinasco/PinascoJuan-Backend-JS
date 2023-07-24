@@ -1,6 +1,6 @@
-const fs = require("fs");
+import fs from "fs";
 
-class productManager {
+class productsManager {
   constructor(path) {
     this.path = path;
   }
@@ -81,6 +81,10 @@ class productManager {
   }
 }
 
+const productsManager = new productsManager("products.json");
+export default productsManager;
+
+/* 
 //cuerpos de productos
 const producto1 = {
   title: "1er producto prueba",
@@ -110,8 +114,9 @@ const objModif = {
   title: "2do producto modificado",
   description: "este es un 2do producto prueba que se modifico",
 };
-
+ */
 //Ejecucion
+/*
 async function prueba() {
   const manager = new productManager("productos.json");
   await manager.addProduct(producto1);
@@ -131,4 +136,4 @@ async function prueba() {
   console.log(getProductosConP2Modificado);
 }
 
-prueba();
+prueba(); */
