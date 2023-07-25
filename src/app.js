@@ -8,7 +8,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-const controllerManager = new productsManager("../products.json");
+const controllerManager = new productsManager("./products.json");
 
 //rutas
 app.get("/api/products", async (req, res) => {
