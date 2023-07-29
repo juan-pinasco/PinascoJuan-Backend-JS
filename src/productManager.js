@@ -28,8 +28,10 @@ class productsManager {
       } else {
         id = productsPrev.length + 1;
       }
-      productsPrev.push({ ...objProduct, id });
+      const nuevoProducto = { ...objProduct, id };
+      productsPrev.push(nuevoProducto);
       await fs.promises.writeFile(this.path, JSON.stringify(productsPrev));
+      return nuevoProducto;
     } catch (error) {
       return error;
     }
