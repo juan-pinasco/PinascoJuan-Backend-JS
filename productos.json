@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "category": "Toyota",
+    "title": "Toyota Corolla",
+    "description": "origen Brasil",
+    "price": 100,
+    "thumbmail": "sin imagen",
+    "code": "a1",
+    "stock": 20,
+    "status": true
+  },
+  {
+    "id": 2,
+    "category": "Toyota",
+    "title": "Toyota camry",
+    "description": "origen Japon",
+    "price": 200,
+    "thumbmail": "sin imagen",
+    "code": "a2",
+    "stock": 25,
+    "status": true
+  },
+  {
+    "id": 3,
+    "category": "Audi",
+    "title": "Audi a3 sedan",
+    "description": "origen Alemania",
+    "price": 300,
+    "thumbmail": "sin imagen",
+    "code": "b1",
+    "stock": 30,
+    "status": true
+  },
+  {
+    "id": 4,
+    "category": "Audi",
+    "title": "Audi a4",
+    "description": "origen Alemania",
+    "price": 400,
+    "thumbmail": "sin imagen",
+    "code": "b2",
+    "stock": 25,
+    "status": true
+  },
+  {
+    "id": 5,
+    "category": "Ford",
+    "title": "f-150",
+    "description": "origen Estados Unidos",
+    "price": 300,
+    "thumbmail": "sin imagen",
+    "code": "c1",
+    "stock": 35,
+    "status": true
+  },
+  {
+    "id": 6,
+    "category": "Ford",
+    "title": "Ranger",
+    "description": "origen Argentina",
+    "price": 200,
+    "thumbmail": "sin imagen",
+    "code": "c2",
+    "stock": 20,
+    "status": true
+  }
+]
