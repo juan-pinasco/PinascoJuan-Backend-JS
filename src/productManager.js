@@ -21,17 +21,24 @@ class productsManager {
 
   async addProduct(objProduct) {
     try {
+      const { code } = objProduct;
       const productsPrev = await this.getProducts();
+      if (productsPrev.find((prod) => prod.code === code)) {
+        return {
+          operation: false,
+          message:
+            "No se puede agregar el producto, el código que ingresó ya existe",
+        };
+      }
       let id;
       if (!productsPrev.length) {
         id = 1;
       } else {
         id = productsPrev.length + 1;
       }
-      const nuevoProducto = { ...objProduct, id };
-      productsPrev.push(nuevoProducto);
+      productsPrev.push({ ...objProduct, id });
       await fs.promises.writeFile(this.path, JSON.stringify(productsPrev));
-      return nuevoProducto;
+      return { operation: true, nuevoProducto: { ...objProduct, id } };
     } catch (error) {
       return error;
     }
@@ -70,6 +77,9 @@ class productsManager {
   async deleteProduct(id) {
     try {
       const productPrev = await this.getProducts();
+      if (!productPrev.find((prod) => prod.id === id)) {
+        return { operation: false, message: "El id proporcionado no existe" };
+      }
       const nuevoArrayConProductoEliminado = productPrev.filter(
         (p) => p.id !== id
       );
@@ -77,6 +87,8 @@ class productsManager {
         this.path,
         JSON.stringify(nuevoArrayConProductoEliminado)
       );
+      const modData = await this.getProducts();
+      return { operation: true, modData };
     } catch (error) {
       return error;
     }

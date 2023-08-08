@@ -1,4 +1,26 @@
-<h1>BInevenido a home</h1>
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/index.js"></script>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price ($)</th>
+      <th>Stock</th>
+      <th>code</th>
+      <th>category</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each products}}
+      <tr>
+        <td>{{id}}</td>
+        <td>{{title}}</td>
+        <td>{{description}}</td>
+        <td>{{price}}</td>
+        <td>{{stock}}</td>
+        <td>{{code}}</td>
+        <td>{{category}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
