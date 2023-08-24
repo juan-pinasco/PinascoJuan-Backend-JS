@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { productsMongo } from "../dao/managers/products/productsMongo.js";
-import productsManager from "../dao/managers/products/productManager.js";
+/* import productsManager from "../dao/managers/products/productManager.js"; */
 const router = Router();
 
-const controllerManager = new productsManager("./productos.json");
+/* const controllerManager = new productsManager("./productos.json"); */
 
 //get
 /* router.get("/", async (req, res) => {
@@ -20,7 +20,7 @@ const controllerManager = new productsManager("./productos.json");
   } catch (error) {
     res.status(500).json({ error });
   }
-}); */
+});  */
 //get mongo
 router.get("/", async (req, res) => {
   try {
@@ -51,7 +51,7 @@ router.get("/:pid", async (req, res) => {
   const { pid } = req.params;
   try {
     const product = await productsMongo.getProductById(pid);
-    if (!product) {
+    if (!product._id) {
       res.status(400).json({ message: "Invalid PID" });
     } else {
       res.status(200).json({ message: "Product found", product });

@@ -1,6 +1,7 @@
 import express from "express";
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
+import messagesRouter from "./routes/messages.router.js";
 import { __dirname } from "./utils.js";
 import handlebars from "express-handlebars";
 import viewsRouter from "./routes/views.router.js";
@@ -23,6 +24,7 @@ app.use("/", viewsRouter);
 //rutas
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
+app.use("/api/messages", messagesRouter);
 
 //puerto
 const PORT = 8080;
@@ -32,9 +34,21 @@ const httpServer = app.listen(PORT, () => {
 
 const socketServer = new Server(httpServer);
 
+const mensajes = [];
+
 socketServer.on("connection", (socket) => {
   console.log(`Cliente conectado: ${socket.id}`);
 
+  socket.on("disconnect", () => {
+    console.log(`Usuario desconectado: ${socket.id}`);
+  });
+
+  //-----------------chat---------------------------
+  socket.on("mensaje", (infoMensaje) => {
+    mensajes.push(infoMensaje);
+    socketServer.emit("mensajeParaTodos", mensajes);
+  });
+  //------------------------------------------------
   const controllerManager = new productsManager("./productos.json");
 
   socket.on("agregar", async (objProd) => {
@@ -55,3 +69,11 @@ socketServer.on("connection", (socket) => {
     }
   });
 });
+
+/* socketServer.on("connection", (socket) => {
+  console.log(`Usuario conectado: ${socket.id}`);
+
+  socket.on("disconnect", () => {
+    console.log(`Usuario desconectado: ${socket.id}`);
+  });
+}); */
