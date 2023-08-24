@@ -1,9 +1,11 @@
 import { Router } from "express";
-import cartManager from "../cartsManager.js";
+import { cartsMongo } from "../dao/managers/carts/cartsMongo.js";
+import cartManager from "../dao/managers/carts/cartsManager.js";
 const router = Router();
 
 const cartControllerManager = new cartManager("./Carrito.json");
 
+//get
 router.get("/:cid", async (req, res) => {
   const { cid } = req.params;
   try {
@@ -14,6 +16,7 @@ router.get("/:cid", async (req, res) => {
   }
 });
 
+//post
 router.post("/", async (req, res) => {
   try {
     const creatCart = await cartControllerManager.createCart();
@@ -23,6 +26,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+//post
 router.post("/:cid/product/:pid", async (req, res) => {
   const { cid, pid } = req.params;
   try {

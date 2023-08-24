@@ -5,13 +5,15 @@ import { __dirname } from "./utils.js";
 import handlebars from "express-handlebars";
 import viewsRouter from "./routes/views.router.js";
 import { Server } from "socket.io";
-import productsManager from "./ProductManager.js";
+import productsManager from "./dao/managers/products/productManager.js";
+import "./dao/db/dbConfig.js";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//handlebars
 app.use(express.static(__dirname + "/public"));
 app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
@@ -22,7 +24,7 @@ app.use("/", viewsRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 
-//
+//puerto
 const PORT = 8080;
 const httpServer = app.listen(PORT, () => {
   console.log(`escuchando al puerto ${PORT}`);
