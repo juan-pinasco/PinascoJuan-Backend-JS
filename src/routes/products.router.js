@@ -4,7 +4,7 @@ import { productsMongo } from "../managers/products/ProductsMongo.js";
 const router = Router();
 
 //get todos
-router.get("/", async (req, res) => {
+/* router.get("/", async (req, res) => {
   try {
     const products = await productsMongo.getProducts();
     if (products.length) {
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error });
   }
-});
+}); */
 
 //get por id
 router.get("/:pid", async (req, res) => {
@@ -68,6 +68,13 @@ router.put("/:pid", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error });
   }
+});
+
+//clase 16. anulo get de arriba y pongo el siguiente
+router.get("/", async (req, res) => {
+  const obj = { _id: "64ee0acdcd7cf5eb640d8e9e" };
+  const products = await productsMongo.findOne(obj);
+  res.json({ products });
 });
 
 export default router;

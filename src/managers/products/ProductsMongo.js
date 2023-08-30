@@ -46,6 +46,18 @@ class ProductsMongo {
       return error;
     }
   }
+
+  //indexado clase 16  por ej para buscar por {name: "title"}
+  async findOne(obj) {
+    try {
+      const product = await productsModel
+        .findOne(obj)
+        .explain("executionStats");
+      return product;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export const productsMongo = new ProductsMongo();

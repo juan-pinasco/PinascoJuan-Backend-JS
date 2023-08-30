@@ -12,7 +12,9 @@ class CartsMongo {
 
   async getCartById(id) {
     try {
-      const cart = await cartsModel.findById(id);
+      const cart = await cartsModel
+        .findById(id)
+        .populate("products" /* ,["price","quantity"] ?*/);
       return cart;
     } catch (error) {
       return error;

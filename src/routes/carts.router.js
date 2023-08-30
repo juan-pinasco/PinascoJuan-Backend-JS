@@ -31,8 +31,8 @@ router.get("/:cid", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { title, price, quantity } = req.body;
-  if (!title || !price || !quantity) {
+  const { products, price, quantity } = req.body;
+  if (!products || !price || !quantity) {
     return res.status(400).json({ message: "Some data is missing" });
   }
   try {
