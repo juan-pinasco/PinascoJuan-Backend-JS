@@ -10,11 +10,18 @@ class ProductsMongo {
     }
   } */
   //hago un get products nuevo para paginate como el de abajo y comento el de arriba(clase 17)
-  async getProducts() {
+  async getProducts(obj) {
+    const { limit, page, sortASC, sortDESC, ...query } = obj;
     try {
-      const products = await productsModel.paginate({}, {});
-      const info = {};
-      return products;
+      const product = await productsModel.paginate(
+        query,
+        { limit, page, sort: { price: ASC, price: DESC } } //no me funciona como lo hizo y dice profesor Farid Sesin
+      );
+      const info = {
+        count: product.totalDocs,
+        pages: product.totalPages,
+      };
+      return { info, productos: product.docs };
     } catch (error) {
       return error;
     }

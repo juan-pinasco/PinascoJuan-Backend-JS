@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { productsMongo } from "../managers/products/ProductsMongo.js";
-
+import { __dirname } from "../utils.js";
 const router = Router();
 
 //get todos
@@ -19,8 +19,8 @@ const router = Router();
 //para paginate el if y else no van.  por eso comento el de get de arriba y hago el nuevo de abajo.(clase 17)
 router.get("/", async (req, res) => {
   try {
-    const products = await productsMongo.getProducts();
-    res.status(200).json({ message: "Products", products });
+    const products = await productsMongo.getProducts(req.query);
+    res.status(200).json({ products });
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -87,9 +87,9 @@ router.put("/:pid", async (req, res) => {
 }); */
 
 //clase 17. anulo get de clase 16(indexacion) y pongo el siguiente. (tema: aggregation)
-router.get("/aggregation", async (req, res) => {
+/* router.get("/aggregation", async (req, res) => {
   const response = await productsMongo.aggregationMet();
   res.json({ response });
 });
-
+ */
 export default router;
