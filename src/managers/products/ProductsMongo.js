@@ -1,9 +1,19 @@
 import { productsModel } from "../../db/models/products.model.js";
 
 class ProductsMongo {
-  async getProducts() {
+  /* async getProducts() {
     try {
       const products = await productsModel.find({});
+      return products;
+    } catch (error) {
+      return error;
+    }
+  } */
+  //hago un get products nuevo para paginate como el de abajo y comento el de arriba(clase 17)
+  async getProducts() {
+    try {
+      const products = await productsModel.paginate({}, {});
+      const info = {};
       return products;
     } catch (error) {
       return error;
@@ -48,12 +58,22 @@ class ProductsMongo {
   }
 
   //indexado clase 16  por ej para buscar por {name: "title"}
-  async findOne(obj) {
+  /* async findOne(obj) {
     try {
       const product = await productsModel
         .findOne(obj)
         .explain("executionStats");
       return product;
+    } catch (error) {
+      return error;
+    }
+  } */
+
+  //aggregation clase 17
+  async aggregationMet() {
+    try {
+      const response = await productsModel.aggregate([{}]);
+      return response;
     } catch (error) {
       return error;
     }

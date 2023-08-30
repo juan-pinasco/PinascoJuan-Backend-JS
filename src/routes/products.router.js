@@ -16,6 +16,15 @@ const router = Router();
     res.status(500).json({ error });
   }
 }); */
+//para paginate el if y else no van.  por eso comento el de get de arriba y hago el nuevo de abajo.(clase 17)
+router.get("/", async (req, res) => {
+  try {
+    const products = await productsMongo.getProducts();
+    res.status(200).json({ message: "Products", products });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+});
 
 //get por id
 router.get("/:pid", async (req, res) => {
@@ -71,10 +80,16 @@ router.put("/:pid", async (req, res) => {
 });
 
 //clase 16. anulo get de arriba y pongo el siguiente
-router.get("/", async (req, res) => {
+/* router.get("/", async (req, res) => {
   const obj = { _id: "64ee0acdcd7cf5eb640d8e9e" };
   const products = await productsMongo.findOne(obj);
   res.json({ products });
+}); */
+
+//clase 17. anulo get de clase 16(indexacion) y pongo el siguiente. (tema: aggregation)
+router.get("/aggregation", async (req, res) => {
+  const response = await productsMongo.aggregationMet();
+  res.json({ response });
 });
 
 export default router;
