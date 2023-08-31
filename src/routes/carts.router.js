@@ -46,8 +46,18 @@ router.post("/", async (req, res) => {
 router.delete("/:cid", async (req, res) => {
   const { cid } = req.params;
   try {
-    const response = await cartsMongo.deleteCart(cid);
-    res.status(200).json({ message: "carrito borrado" });
+    const response = await cartsMongo.deleteAllCart(cid);
+    res.status(200).json({ message: "producto borrado" });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+});
+
+router.delete("/:cid/products/:pid", async (req, res) => {
+  const { cid, pid } = req.params;
+  try {
+    const response = await cartsMongo.deleteCart(cid, pid);
+    res.status(200).json({ message: "success" });
   } catch (error) {
     res.status(500).json({ error });
   }

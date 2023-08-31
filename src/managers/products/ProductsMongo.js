@@ -10,7 +10,7 @@ class ProductsMongo {
     }
   } */
   //hago un get products nuevo para paginate como el de abajo y comento el de arriba(clase 17)
-  async getProducts(obj) {
+  /* async getProducts(obj) {
     const { limit, page, sortASC, sortDESC, ...query } = obj;
     try {
       const product = await productsModel.paginate(
@@ -18,10 +18,59 @@ class ProductsMongo {
         { limit, page, sort: { price: ASC, price: DESC } } //no me funciona como lo hizo y dice profesor Farid Sesin
       );
       const info = {
-        count: product.totalDocs,
-        pages: product.totalPages,
+        status: product.status,
+        payload: product.totalDocs,
+        totalPages: product.totalPages,
+        prevPage: product.prevPage,
+        nextPage: product.nextPage,
+        page: product.page,
+        hasNextPage: product.hasNextPage ? true : false,
+        hasPrevPage: product.hasPrevPage ? true : false,
+        nextLink: product.hasNextPage
+          ? `http://localhost:8080/api/products?page=${product.nextPage}`
+          : null,
+        prevLink: product.hasPrevPage
+          ? `http://localhost:8080/api/products?page=${product.prevPage}`
+          : null,
       };
-      return { info, productos: product.docs };
+      return info;
+    } catch (error) {
+      return error;
+    }
+  } */
+
+  async getProducts(obj) {
+    try {
+      const { limit, page, sortASC, sortDESC, ...query } = obj;
+      const sortOrder = {};
+      if (sortASC) {
+        sortOrder.price = 1;
+      }
+      if (sortDESC) {
+        sortOrder.price = -1;
+      }
+      const product = await productsModel.paginate(query, {
+        limit,
+        page,
+        sort: sortOrder,
+      });
+      const info = {
+        status: product.status,
+        payload: product.totalDocs,
+        totalPages: product.totalPages,
+        prevPage: product.prevPage,
+        nextPage: product.nextPage,
+        page: product.page,
+        hasNextPage: product.hasNextPage ? true : false,
+        hasPrevPage: product.hasPrevPage ? true : false,
+        nextLink: product.hasNextPage
+          ? `http://localhost:8080/api/products?page=${product.nextPage}`
+          : null,
+        prevLink: product.hasPrevPage
+          ? `http://localhost:8080/api/products?page=${product.prevPage}`
+          : null,
+      };
+      return { info, products: product };
     } catch (error) {
       return error;
     }

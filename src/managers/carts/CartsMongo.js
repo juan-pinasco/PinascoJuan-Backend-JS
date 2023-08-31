@@ -12,9 +12,7 @@ class CartsMongo {
 
   async getCartById(id) {
     try {
-      const cart = await cartsModel
-        .findById(id)
-        .populate("products" /* ,["price","quantity"] ?*/);
+      const cart = await cartsModel.findById(id).populate("products");
       return cart;
     } catch (error) {
       return error;
@@ -48,9 +46,23 @@ class CartsMongo {
     }
   }
 
-  async deleteCart(id) {
+  async deleteAllCart(id) {
     try {
       const response = await cartsModel.findByIdAndDelete(id);
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async deleteCart(cid, pid) {
+    try {
+      const cart = await cartsModel.findById(cid);
+      if (!cart) throw new Error("Cart not found");
+      const response = await cartsModel.updateOne(
+        { _id: cid },
+        { $pull: { products: pid } }
+      );
       return response;
     } catch (error) {
       return error;
