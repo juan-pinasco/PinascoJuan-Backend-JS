@@ -41,7 +41,7 @@ class ProductsMongo {
 
   async getProducts(obj) {
     try {
-      const { limit, page, sortASC, sortDESC, ...query } = obj;
+      const { limit = 10, page = 1, sortASC, sortDESC, ...query } = obj;
       const sortOrder = {};
       if (sortASC) {
         sortOrder.price = 1;
@@ -126,14 +126,14 @@ class ProductsMongo {
   } */
 
   //aggregation clase 17
-  async aggregationMet() {
+  /*   async aggregationMet() {
     try {
       const response = await productsModel.aggregate([{}]);
       return response;
     } catch (error) {
       return error;
     }
-  }
+  }*/
 }
 
 export const productsMongo = new ProductsMongo();
