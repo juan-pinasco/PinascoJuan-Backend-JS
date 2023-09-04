@@ -5,8 +5,8 @@ import { cartsMongo } from "../managers/carts/CartsMongo.js";
 const router = Router();
 
 router.get("/products", async (req, res) => {
-  const products = await productsMongo.getProducts();
-  res.render("products", products);
+  const products = await productsMongo.getProducts(req.query);
+  res.status(200).render("products", { products });
 });
 
 router.get("/carts", async (req, res) => {

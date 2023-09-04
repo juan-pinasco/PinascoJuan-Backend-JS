@@ -1,6 +1,11 @@
 <h1>Estos son los PRODUCTOS</h1>
 
 <div id="productosPlasmados"></div>
+{{#each products.products.docs}}
+
+  {{this}}
+
+{{/each}}
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/indexProducts.js"></script>
