@@ -41,6 +41,12 @@ class ProductsMongo {
 
   async getProducts(obj) {
     try {
+      if (!obj) {
+        obj = {
+          limit: 10,
+          page: 1,
+        };
+      }
       const { limit = 10, page = 1, sortASC, sortDESC, ...query } = obj;
       const sortOrder = {};
       if (sortASC) {

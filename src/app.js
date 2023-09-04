@@ -7,6 +7,7 @@ import "./db/dbConfig.js";
 import viewsRouter from "./routes/views.router.js"; //handlebars
 import { Server } from "socket.io";
 import { productsMongo } from "./managers/products/ProductsMongo.js";
+import { cartsMongo } from "./managers/carts/CartsMongo.js";
 
 const app = express();
 
@@ -60,8 +61,12 @@ socketServer.on("connection", async (socket) => {
   console.log("cliente conectado", socket.id);
 
   const arrayProductos = await productsMongo.getProducts();
-  console.log(arrayProductos);
+  /* console.log(arrayProductos); */
   socketServer.emit("arreglo de productos", arrayProductos);
 
   /* socketServer.emit("arreglo de productos", arrayProductos); */
+
+  const arrayCarts = await cartsMongo.getCarts();
+  /* console.log(arrayProductos); */
+  socketServer.emit("arreglo de carritos", arrayCarts);
 });

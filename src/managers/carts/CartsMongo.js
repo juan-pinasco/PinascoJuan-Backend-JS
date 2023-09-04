@@ -3,7 +3,7 @@ import { cartsModel } from "../../db/models/carts.model.js";
 class CartsMongo {
   async getCarts() {
     try {
-      const carts = await cartsModel.find({});
+      const carts = await cartsModel.find({}).populate("products");
       return carts;
     } catch (error) {
       return error;
