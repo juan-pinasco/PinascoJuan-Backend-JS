@@ -1,10 +1,23 @@
 import express from "express";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import { __dirname } from "./utils.js";
-const app = express();
+import mongoose from "mongoose";
+
+const app = express(); //app conectado con serv express
+
+const connection = mongoose.connect(
+  "mongodb+srv://juanpinascoprogramacion:juanpinascoprogramacion@cluster0.46weonh.mongodb.net/Ecommerce?retryWrites=true&w=majority"
+);
 
 app.use(
   session({
+    store: new MongoStore({
+      mongoUrl:
+        "mongodb+srv://juanpinascoprogramacion:juanpinascoprogramacion@cluster0.46weonh.mongodb.net/Ecommerce?retryWrites=true&w=majority",
+      //ttl: 30, // ==> esta en segundos //==> si borramos ttl, por defecto mongo te da 14 dias
+      //colectionName:nombre de coleccion //==> esto es por si queremos hacer una cellection en mongo personalizada, pero por defecto la hace sola
+    }),
     secret: "desafioDeClase",
     resave: false,
     saveUninitialized: false,
