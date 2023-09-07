@@ -30,7 +30,7 @@ app.use(
     store: new MongoStore({
       mongoUrl:
         "mongodb+srv://juanpinascoprogramacion:juanpinascoprogramacion@cluster0.46weonh.mongodb.net/Ecommerce?retryWrites=true&w=majority",
-      //ttl: 30, // ==> esta en segundos //==> si borramos ttl, por defecto mongo te da 14 dias
+      ttl: 3600, // ==> esta en segundos //==> si borramos ttl, por defecto mongo te da 14 dias
       //colectionName:nombre de coleccion //==> esto es por si queremos hacer una cellection en mongo personalizada, pero por defecto la hace sola
     }),
     secret: "desafioDeClase",

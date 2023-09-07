@@ -13,7 +13,7 @@ form.addEventListener("submit", async (event) => {
     },
   });
   const responseData = await response.json();
-  /* if (responseData.status === "success") {
-    window.location.replace("/login"); //redirijo a login una vez registrado de manera exitosa
-  } */ // hacer una redireccion a products
+  if (responseData.status === "success") {
+    window.location.replace("/profile"); //redirijo a profile una vez registrado de manera exitosa
+  } // hacer una redireccion a products
 });
