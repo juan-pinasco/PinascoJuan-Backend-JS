@@ -7,6 +7,7 @@ const schema = new mongoose.Schema({
   last_name: String,
   email: String,
   password: String,
+  rol: String,
 });
 
 const userModel = mongoose.model(collection, schema);
