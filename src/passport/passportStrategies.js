@@ -31,21 +31,23 @@ passport.use(
       callbackURL: "http://localhost:8080/api/sessions/github",
     },
     async function (accessToken, refreshToken, profile, done) {
-      /* console.log(profile);
-      done(null, false); */
-      /* User.findOrCreate({ githubId: profile.id }, function (err, user) {
-      return done(err, user);
-    }); */
       try {
-        const userDB = await userModel.findOne(profile.username);
+        const userDB = await userModel.findOne({ profile: profile.username });
+        //login
         if (userDB) {
+          /* if (userDB.fromGithub) {
+            return done(null, userDB);
+          } else { */
           return done(null, false);
+          /* } */
         }
+        //registro
         const newUser = {
-          first_name: profile.displayName.split("")[0],
-          last_name: profile.displayName.split("")[1],
+          first_name: profile.displayName.split(" ")[0],
+          last_name: profile.displayName.split(" ")[1],
           username: profile.username,
           password: " ",
+          /* fromGithub: true, */
         };
         const result = await userModel.create(newUser);
         return done(null, result);

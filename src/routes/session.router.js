@@ -8,7 +8,7 @@ const router = Router();
 
 router.post("/register", async (req, res) => {
   const { first_name, last_name, username, email, password, rol } = req.body;
-  const exist = await userModel.findOne({ username, email });
+  const exist = await userModel.findOne({ email });
   if (exist) {
     return res
       .status(400)
@@ -62,6 +62,7 @@ router.post("/login", async (req, res) => {
   // si al comparar contraseña del usuario es valida, crearle una sesion y mandarle estas propiedades a profile
   req.session.user = {
     name: `${user.first_name} ${user.last_name}`,
+    username: user.username,
     email: user.email,
     rol: user.rol,
   };
@@ -79,10 +80,13 @@ router.get(
   passport.authenticate("github", { scope: ["user:email"] })
 );
 
-router.get("/github", passport.authenticate("github"), async (req, res) => {
-  console.log(req);
-  res.send("bienvenido desde github");
-});
+router.get(
+  "/github",
+  passport.authenticate("github", {
+    failureRedirect: "/login",
+    successRedirect: "/profile",
+  })
+);
 //finaliza passport github
 
 //

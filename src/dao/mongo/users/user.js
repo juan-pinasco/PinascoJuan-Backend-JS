@@ -3,16 +3,16 @@ import mongoose from "mongoose";
 const collection = "users";
 
 const schema = new mongoose.Schema({
-  first_name: String,
-  last_name: String,
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  email: String,
-  password: String,
-  rol: String,
+  first_name: { type: String },
+  last_name: { type: String },
+  username: { type: String, unique: true },
+  email: { type: String },
+  password: { type: String },
+  rol: { type: String },
+  /* fromGithub: {
+    type: Boolean,
+    default: true,
+  }, */
 });
 
 const userModel = mongoose.model(collection, schema);
