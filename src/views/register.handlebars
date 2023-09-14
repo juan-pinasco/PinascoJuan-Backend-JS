@@ -9,6 +9,9 @@
     <label>Apellido</label>
     <input name="last_name" />
 
+    <label>Username</label>
+    <input type="username" />
+
     <label>Email</label>
     <input name="email" />
 
@@ -19,6 +22,8 @@
 
   </form>
   <p>¿ya tienes una cuenta? <a href="/login">Ingrese aquí</a></p>
+
+  <button onclick="location.href=`/api/sessions/githubSignup`">GITHUB</button>
 
 </div>
 

@@ -5,6 +5,11 @@ const collection = "users";
 const schema = new mongoose.Schema({
   first_name: String,
   last_name: String,
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   email: String,
   password: String,
   rol: String,

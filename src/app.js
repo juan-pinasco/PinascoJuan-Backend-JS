@@ -2,11 +2,12 @@ import express from "express";
 import session from "express-session";
 import handlebars from "express-handlebars";
 import MongoStore from "connect-mongo";
-import mongoose from "mongoose";
-
+import "./dao/mongo/dbconfig.js";
 import viewsRouter from "./routes/views.router.js";
 import sessionsRouter from "./routes/session.router.js";
 import { __dirname } from "./utils.js";
+import passport from "passport";
+import "./passport/passportStrategies.js";
 
 const app = express(); //app conectado con serv express
 
@@ -19,12 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/public`)); //para poder acceder a nuestra carpeta publica
 
-//mongoose
-const connection = mongoose.connect(
-  "mongodb+srv://juanpinascoprogramacion:juanpinascoprogramacion@cluster0.46weonh.mongodb.net/Ecommerce?retryWrites=true&w=majority"
-);
+//mongoose en dbconfig.js
 
-//mongoStore
+//mongoStore sessions
 app.use(
   session({
     store: new MongoStore({
@@ -38,6 +36,10 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+//passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 //route
 app.use("/", viewsRouter);
