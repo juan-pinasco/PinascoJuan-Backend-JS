@@ -35,11 +35,11 @@ passport.use(
         const userDB = await userModel.findOne({ profile: profile.username });
         //login
         if (userDB) {
-          /* if (userDB.fromGithub) {
+          if (userDB.fromGithub) {
             return done(null, userDB);
-          } else { */
-          return done(null, false);
-          /* } */
+          } else {
+            return done(null, false);
+          }
         }
         //registro
         const newUser = {
@@ -47,7 +47,7 @@ passport.use(
           last_name: profile.displayName.split(" ")[1],
           username: profile.username,
           password: " ",
-          /* fromGithub: true, */
+          fromGithub: true,
         };
         const result = await userModel.create(newUser);
         return done(null, result);

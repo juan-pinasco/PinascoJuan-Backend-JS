@@ -9,10 +9,10 @@ const schema = new mongoose.Schema({
   email: { type: String },
   password: { type: String },
   rol: { type: String },
-  /* fromGithub: {
+  fromGithub: {
     type: Boolean,
     default: true,
-  }, */
+  },
 });
 
 const userModel = mongoose.model(collection, schema);
