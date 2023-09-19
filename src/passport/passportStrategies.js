@@ -31,8 +31,11 @@ passport.use(
       callbackURL: "http://localhost:8080/api/sessions/github",
     },
     async function (accessToken, refreshToken, profile, done) {
+      console.log(profile);
       try {
-        const userDB = await userModel.findOne({ profile: profile.username });
+        /* const userDB = await userModel.findOne({ profile: profile.username }); */
+        const userDB = await userModel.findOne({ username: profile.username });
+        /* const userDB = await userModel.findOne(profile.username); */
         //login
         if (userDB) {
           if (userDB.fromGithub) {
