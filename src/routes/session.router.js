@@ -55,7 +55,7 @@ router.post("/login", async (req, res) => {
     });
   //si existe el usuario comparale la contraseña hasheada
   const isPasswordValid = await compareData(password, user.password);
-  console.log(isPasswordValid);
+  /* console.log(isPasswordValid); */
   if (!isPasswordValid) {
     return res.status(401).json({ message: "username or password not valid" });
   }
@@ -63,7 +63,6 @@ router.post("/login", async (req, res) => {
   req.session.user = {
     name: `${user.first_name} ${user.last_name}`,
     username: user.username,
-    email: user.email,
     rol: user.rol,
   };
   res.send({
@@ -71,7 +70,6 @@ router.post("/login", async (req, res) => {
     payload: req.session.user,
     message: "Primer logueo!!!",
   });
-  /* res.sendStatus(200); */
 });
 
 //passport github

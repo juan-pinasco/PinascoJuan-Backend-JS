@@ -6,9 +6,9 @@ import { compareData } from "../utils.js";
 
 passport.use(
   "Login",
-  new LocalStrategy(async function (email, password, done) {
+  new LocalStrategy(async function (username, password, done) {
     try {
-      const user = await userModel.findOne({ email });
+      const user = await userModel.findOne(username);
       if (!user) {
         return done(null, false);
       }
@@ -31,9 +31,7 @@ passport.use(
       callbackURL: "http://localhost:8080/api/sessions/github",
     },
     async function (accessToken, refreshToken, profile, done) {
-      console.log(profile);
       try {
-        /* const userDB = await userModel.findOne({ profile: profile.username }); */
         const userDB = await userModel.findOne({ username: profile.username });
         /* const userDB = await userModel.findOne(profile.username); */
         //login
