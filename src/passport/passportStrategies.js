@@ -61,7 +61,7 @@ passport.use(
 
 //user => id
 passport.serializeUser((usuario, done) => {
-  done(null, usuario._id);
+  done(null, usuario /* ._id */);
 });
 
 //id => user

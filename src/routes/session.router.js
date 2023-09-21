@@ -61,9 +61,8 @@ router.post("/login", async (req, res) => {
   }
   // si al comparar contraseña del usuario es valida, crearle una sesion y mandarle estas propiedades a profile
   req.session.user = {
-    name: `${user.first_name} ${user.last_name}`,
+    first_name: user.first_name,
     username: user.username,
-    rol: user.rol,
   };
   res.send({
     status: "success",

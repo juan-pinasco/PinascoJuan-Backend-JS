@@ -22,9 +22,10 @@ router.get("/login", publicAcces, (req, res) => {
 });
 
 router.get("/profile", (req, res) => {
-  /* console.log(req.user); */
+  /* console.log(req.session.passport.user); */
   res.render("profile", {
-    user: req.session.user,
+    /* user: req.session.user, */
+    user: req.session.passport.user,
   });
 });
 
