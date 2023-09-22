@@ -60,13 +60,29 @@ router.post("/login", async (req, res) => {
     return res.status(401).json({ message: "username or password not valid" });
   }
   // si al comparar contraseña del usuario es valida, crearle una sesion y mandarle estas propiedades a profile
-  req.session.user = {
+  /* req.session.user = {
     first_name: user.first_name,
     username: user.username,
+  }; */
+  req.session.passport = {
+    user: {
+      first_name: user.first_name,
+
+      last_name: user.last_name,
+
+      _id: user._id,
+
+      rol: user.rol,
+
+      email: user.email,
+
+      username: user.username,
+    },
   };
   res.send({
     status: "success",
-    payload: req.session.user,
+    /* payload: req.session.user, */
+    payload: req.session.passport,
     message: "Primer logueo!!!",
   });
 });
